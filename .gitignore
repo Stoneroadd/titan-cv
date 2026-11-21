@@ -9,6 +9,7 @@ candidate/profile.draft.yaml
 candidate/answers.yaml
 candidate/declarations.yaml
 candidate/question_bank.yaml
+candidate/knowledge.yaml
 candidate/documents/
 candidate/*.pdf
 candidate/*.docx

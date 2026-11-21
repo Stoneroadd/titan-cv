@@ -12,7 +12,8 @@ from pathlib import Path
 GROUPS: dict[str, tuple[str, ...]] = {
     "outputs": ("outputs", "jobs"),
     "sessions": ("browser-profile", "linkedin_guard.json", "robot.lock"),
-    "history": ("cvtitan.db", "cvtitan.db-wal", "cvtitan.db-shm", "cvtitan.db-journal", "auto", "llm_audit.jsonl"),
+    "history": ("cvtitan.db", "cvtitan.db-wal", "cvtitan.db-shm", "cvtitan.db-journal", "auto", "llm_audit.jsonl",
+                "pending_questions.jsonl"),
     "cache": ("cache", "market_cache.jsonl", "busqueda.csv", "geo"),
 }
 

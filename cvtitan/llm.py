@@ -167,7 +167,7 @@ def rewrite_cv(draft: dict, job: dict, backed_skills: list[str]) -> CVRewrite:
 class FieldAnswer(BaseModel):
     field_id: str
     value: Optional[str] = Field(None, description="Valor a escribir o la opción exacta a elegir; null si falta el dato")
-    source: Literal["perfil", "preferencias", "respuestas_guardadas", "vacante", "redactado", "ninguna"]
+    source: Literal["perfil", "preferencias", "respuestas_guardadas", "conocimiento", "vacante", "redactado", "ninguna"]
     needs_user: bool = Field(description="True si el dato no está en las fuentes y debe preguntarse al candidato")
     question_for_user: Optional[str] = None
 
@@ -186,6 +186,7 @@ FORM_SYSTEM = (
     "- Para preguntas abiertas de motivación o presentación ('¿por qué te interesa?', 'cuéntanos de ti'), "
     "redacta 2-4 frases con hechos reales del perfil relacionados con la vacante (source='redactado').\n"
     "- Para años de experiencia con una tecnología, responde solo si el perfil permite calcularlo; si no, pregunta.\n"
+    "- `conocimiento_del_candidato` son respuestas del propio candidato, con sus palabras. Para preguntas abiertas de ese estilo, reutiliza sus ideas, hechos y tono (adaptando la redacción a la pregunta y a la vacante, source='conocimiento'); no agregues hechos, cifras ni opiniones que no estén ahí o en el perfil.\n"
     "- Responde en el idioma de la pregunta."
 )
 

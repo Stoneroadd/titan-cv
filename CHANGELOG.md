@@ -8,6 +8,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 - Se versionaron por error 84 archivos de `build/lib/` (artefactos de `python -m build`). Se eliminan y `build/` y `dist/` pasan a `.gitignore`. No afectaba al wheel publicado (solo toma los paquetes declarados).
 
 ### Added
+- **Base de conocimiento y entrevista guiada** (`cvtitan entrevista`, `candidate/knowledge.yaml`, `docs/conocimiento.md`): respondes una vez, con tus palabras, ~40 preguntas típicas de formularios (catálogo editable en `config/interview_questions.yaml`) y el agente las reutiliza sin IA; con la IA activa, se le entregan como tu voz y tus hechos (nueva fuente `conocimiento`), sin inventar más. Las preguntas que frenan una postulación se registran en `data/pending_questions.jsonl` y `cvtitan entrevista --pendientes` las recorre; tu respuesta se reutiliza siempre. `cvtitan purge --historial` también borra ese registro.
+- **Revisión de lo sensible**: si la IA redacta una respuesta sobre sueldo, visa/permiso, reubicación, salud, antecedentes, referencias o disponibilidad, no se escribe sola en el formulario: queda pendiente con la propuesta a la vista para que la apruebes.
 - Web, embudo: **filtro por nivel** y botón **Postular** en las ofertas con acción posible (`POST /api/funnel/{código}/queue`). La URL real se resuelve en el servidor a partir del código (la página nunca la ve), la acción exige el token de sesión y la postulación queda en cola para tu revisión antes de enviar. `GET /api/funnel` acepta `tier` y `limit` (máx. 200).
 
 ### Changed

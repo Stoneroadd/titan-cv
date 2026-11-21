@@ -407,8 +407,11 @@ def resolve(fields: list[dict], profile: Profile, saved: SavedAnswers, files: di
     user_answers = user_answers or {}
     values: dict[str, str] = {}
     pending: list[dict] = []
+    from .. import knowledge as kb
     from .question_bank import BANK_FILE, QuestionBank
-    bank = QuestionBank(profile, Path(getattr(profile, "path", Path("."))).parent / BANK_FILE)
+    candidate_dir = Path(getattr(profile, "path", Path("."))).parent
+    bank = QuestionBank(profile, candidate_dir / BANK_FILE)
+    know = kb.Knowledge(candidate_dir.parent, candidate_dir)
     placeholder = re.compile(r"^(select|selecciona|seleccione|choose|elige)\b[ .…]*(an? option|una opcion)?[ .…]*$")
     for i, f in enumerate(fields):
         # Campo interno de una lista con buscador (react-select de Greenhouse): su «etiqueta» es el texto de ayuda
@@ -429,6 +432,11 @@ def resolve(fields: list[dict], profile: Profile, saved: SavedAnswers, files: di
             v = bank.answer(f)
             if v not in (None, ""):
                 f["_answered_by"] = "diccionario"
+        if (v in (None, "") and f["type"] in ("text", "textarea")
+                and not str(f.get("_answered_by", "")).startswith("pendiente")):
+            v = know.answer(f)             # tus propias palabras (cvtitan entrevista)
+            if v not in (None, ""):
+                f["_answered_by"] = "conocimiento"
         if v not in (None, ""):
             values[f["id"]] = v
         else:
@@ -445,6 +453,7 @@ def resolve(fields: list[dict], profile: Profile, saved: SavedAnswers, files: di
             "skills_respaldadas": [profile.skill_map[k]["name"] for k in profile.backed_keys()],
             "preferencias": profile.data.get("preferences") or {},
             "anos_experiencia_total": profile.years_experience(),
+            "conocimiento_del_candidato": know.context(),
             "vacante": {"cargo": job.get("title"), "empresa": job.get("company"), "pais": job.get("country"),
                         "requisitos": [s["name"] for s in job.get("skills", [])[:15]]},
         }
@@ -459,6 +468,11 @@ def resolve(fields: list[dict], profile: Profile, saved: SavedAnswers, files: di
         for f in pending:
             a = by_id.get(f["id"])
             if a and not a.needs_user and a.value not in (None, ""):
+                if a.source == "redactado" and kb.SENSITIVE_Q.search(normalize(f["label"])):
+                    f["proposal"] = a.value          # tema sensible redactado por la IA: lo revisa el candidato
+                    f["question"] = "Review: the AI drafted this answer on a sensitive topic."
+                    still.append(f)
+                    continue
                 values[f["id"]] = a.value
                 f["_answered_by"] = a.source
             else:
@@ -468,4 +482,9 @@ def resolve(fields: list[dict], profile: Profile, saved: SavedAnswers, files: di
         pending = still
 
     questions = [f for f in pending if f.get("required")]
+    if questions and getattr(profile, "path", None):
+        try:                                # aprender de lo pendiente: `cvtitan entrevista --pendientes`
+            kb.record_pending(candidate_dir.parent, questions, job)
+        except OSError:
+            pass
     return values, questions

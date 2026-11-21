@@ -1,0 +1,89 @@
+# Catálogo de la entrevista guiada (`cvtitan entrevista`).
+# Tú respondes UNA vez, con tus palabras; el agente reutiliza esas respuestas en los formularios y, si activas la IA,
+# las usa como tu voz y tus hechos (nunca inventa lo que no dijiste).
+# ask      = lo que te pregunta el agente.
+# patterns = regex sobre el texto del formulario (sin acentos, en minúsculas, español e inglés).
+# topic    = agrupa las preguntas en `cvtitan entrevista --listar`.
+questions:
+  - {id: sobre_ti, topic: presentacion, ask: "Preséntate en 3-4 frases: quién eres profesionalmente y qué haces mejor.",
+     patterns: ["cuentanos (de|sobre) ti", "hablanos de ti", "tell us about yourself", "about yourself", "introduce yourself", "breve presentacion"]}
+  - {id: pitch, topic: presentacion, ask: "Tu pitch de ascensor en 2 frases: qué ofreces y a quién le sirve.",
+     patterns: ["elevator pitch", "pitch", "resume (tu|su) perfil", "describe (tu|su) perfil"]}
+  - {id: motivacion_general, topic: motivacion, ask: "¿Qué te motiva en el trabajo? ¿Qué te hace querer levantarte a trabajar?",
+     patterns: ["que te motiva", "what motivates you", "motivacion profesional"]}
+  - {id: por_que_cambio, topic: motivacion, ask: "¿Por qué buscas un cambio o un nuevo trabajo ahora?",
+     patterns: ["por que (buscas|quieres) (cambiar|un cambio|dejar)", "why are you (looking|leaving)", "reason for (leaving|looking|change)", "motivo (del|de tu) cambio"]}
+  - {id: por_que_industria, topic: motivacion, ask: "¿Por qué te interesa tu sector (tecnología, minería, datos...)? ¿Qué te atrajo de él?",
+     patterns: ["por que (te interesa|elegiste) (esta|el) (industria|sector|area)", "why (this|our) (industry|field|sector)", "interest in (this|the) (industry|field)"]}
+  - {id: valores, topic: motivacion, ask: "¿Qué valores son innegociables para ti en un trabajo y en un equipo?",
+     patterns: ["valores\\b", "your values", "what values", "que valoras"]}
+  - {id: ambiente_ideal, topic: motivacion, ask: "Describe tu ambiente de trabajo ideal (equipo, autonomía, ritmo, cultura).",
+     patterns: ["ambiente (de trabajo )?ideal", "ideal (work )?(environment|culture)", "cultura (de trabajo )?ideal"]}
+  - {id: que_buscas_jefe, topic: motivacion, ask: "¿Qué esperas de tu jefe o líder directo?",
+     patterns: ["que esperas de (tu|un) (jefe|lider)", "ideal (manager|boss)", "what (do you )?(expect|look for) (in|from) (a|your) (manager|boss|leader)"]}
+  - {id: proximos_5_anos, topic: motivacion, ask: "¿Dónde te ves en 5 años y qué quieres haber aprendido o logrado?",
+     patterns: ["5 anos", "cinco anos", "5 years", "five years", "donde te ves", "where do you see yourself", "metas profesionales", "career goals"]}
+  - {id: fortalezas, topic: perfil, ask: "¿Cuáles son tus 3 mayores fortalezas profesionales? Da un ejemplo real de cada una.",
+     patterns: ["fortalezas", "strengths", "en que destacas", "what are you (best|good) at"]}
+  - {id: debilidades, topic: perfil, ask: "¿Cuál es una debilidad real tuya y qué haces para mejorarla?",
+     patterns: ["debilidad", "areas? de mejora", "weakness", "area for improvement", "areas to improve"]}
+  - {id: estilo_trabajo, topic: perfil, ask: "¿Cómo describirías tu forma de trabajar (autónomo, colaborativo, metódico...)?",
+     patterns: ["estilo de trabajo", "work style", "how (do|would) you describe (your|how you) work", "como trabajas"]}
+  - {id: autonomia, topic: perfil, ask: "¿Prefieres trabajar con autonomía o con supervisión cercana? ¿Por qué?",
+     patterns: ["autonomia", "autonomy", "independently", "de forma independiente"]}
+  - {id: gestion_tiempo, topic: perfil, ask: "¿Cómo organizas tus prioridades y plazos cuando tienes varias cosas a la vez?",
+     patterns: ["priorid", "prioritiz", "gestion del tiempo", "time management", "multiples proyectos", "multiple projects", "plazos"]}
+  - {id: estres, topic: perfil, ask: "¿Cómo manejas la presión o el estrés? Cuenta un caso concreto.",
+     patterns: ["presion", "estres", "pressure", "stress", "tight deadlines"]}
+  - {id: aprendizaje, topic: perfil, ask: "¿Cómo aprendes algo nuevo cuando lo necesitas rápido? Da un ejemplo reciente.",
+     patterns: ["aprendes? (algo )?nuevo", "how do you learn", "learn (a )?new", "aprendizaje continuo", "mantenerte actualizad", "stay (up to date|current)"]}
+  - {id: comunicacion, topic: perfil, ask: "¿Cómo explicas temas técnicos a personas que no lo son? Un ejemplo.",
+     patterns: ["comunica", "communicat", "explain .*non[- ]technical", "stakeholders"]}
+  - {id: decisiones_tecnicas, topic: perfil, ask: "¿Cómo tomas decisiones técnicas cuando hay varias opciones válidas?",
+     patterns: ["decisiones tecnicas", "technical decisions?", "how do you (decide|choose)", "toma de decisiones", "decision[- ]making"]}
+  - {id: logro_principal, topic: experiencia, ask: "Tu mayor logro profesional: situación, qué hiciste tú y el resultado (con cifras si las tienes).",
+     patterns: ["mayor logro", "principal logro", "greatest (achievement|accomplishment)", "proudest", "logro profesional", "achievement you"]}
+  - {id: proyecto_orgulloso, topic: experiencia, ask: "El proyecto del que estás más orgulloso/a y por qué.",
+     patterns: ["proyecto (del que|de que) .*orgullos", "proyecto mas (importante|relevante|significativo)", "project you.*proud", "most (challenging|significant|important) project"]}
+  - {id: desafio, topic: experiencia, ask: "Un desafío difícil que superaste: contexto, cómo lo resolviste y qué aprendiste.",
+     patterns: ["desafio", "retos?\\b", "challenge", "obstacle", "problema dificil", "difficult problem", "dificultad"]}
+  - {id: error_aprendido, topic: experiencia, ask: "Un error que cometiste, cómo lo manejaste y qué cambió después.",
+     patterns: ["errores?\\b", "mistake", "fracaso", "failure", "fallaste", "you failed"]}
+  - {id: conflicto, topic: experiencia, ask: "Un desacuerdo o conflicto con un colega o jefe y cómo lo resolviste.",
+     patterns: ["conflicto", "desacuerdo", "conflict", "disagree", "difficult (coworker|colleague|person)"]}
+  - {id: trabajo_equipo, topic: experiencia, ask: "¿Qué rol sueles tomar en un equipo? Un ejemplo de colaboración que salió bien.",
+     patterns: ["trabajo en equipo", "teamwork", "work(ing)? (in|with) a team", "rol en (un|el) equipo", "role in a team"]}
+  - {id: liderazgo, topic: experiencia, ask: "¿Has liderado personas o proyectos (formal o informalmente)? Cuenta un caso.",
+     patterns: ["liderazgo", "liderado", "lideraste", "leadership", "led a team", "managed (a )?team", "personas a cargo"]}
+  - {id: feedback, topic: experiencia, ask: "¿Cómo reaccionas ante críticas o feedback? Un ejemplo.",
+     patterns: ["feedback", "critica", "criticism", "retroalimentacion"]}
+  - {id: herramienta_favorita, topic: experiencia, ask: "¿Cuál es tu herramienta o tecnología favorita y por qué?",
+     patterns: ["herramienta favorita", "tecnologia favorita", "favorite (tool|technology|language|stack)"]}
+  - {id: sobre_trabajo_actual, topic: experiencia, ask: "¿Qué haces hoy en tu trabajo actual, en tus palabras? ¿Qué te gusta y qué no?",
+     patterns: ["trabajo actual", "current (role|job|position)", "responsabilidades actuales", "describe (tu|your) (rol|role)"]}
+  - {id: trabajo_remoto, topic: condiciones, ask: "¿Cómo te desenvuelves trabajando en remoto? ¿Tienes experiencia y buenas prácticas?",
+     patterns: ["trabajo remoto", "remoto\\b", "remote work", "work(ing)? remotely", "work from home", "teletrabajo"]}
+  - {id: mudanza, topic: condiciones, ask: "¿Estarías dispuesto/a a mudarte o reubicarte? ¿A dónde y bajo qué condiciones?",
+     patterns: ["mudar", "reubica", "relocat", "willing to move", "trasladar"]}
+  - {id: viajes, topic: condiciones, ask: "¿Disponibilidad para viajar? ¿Cuánto y en qué condiciones?",
+     patterns: ["viajar", "viajes", "travel", "traveling"]}
+  - {id: horario_zona, topic: condiciones, ask: "¿Qué horarios o zonas horarias puedes cubrir? ¿Trabajarías en horario de otro país?",
+     patterns: ["horarios?\\b", "zona horaria", "time ?zone", "working hours", "overlap", "turnos", "shifts"]}
+  - {id: contrato_preferencia, topic: condiciones, ask: "¿Qué tipo de contrato prefieres (indefinido, honorarios, contractor) y qué aceptarías?",
+     patterns: ["tipo de contrato", "contract type", "type of (contract|employment)", "full[- ]time|part[- ]time|contractor"]}
+  - {id: empresa_preferida, topic: condiciones, ask: "¿Qué tamaño y tipo de empresa prefieres (startup, corporación, minera...) y por qué?",
+     patterns: ["tamano de (la )?empresa", "type of company", "company size", "startup (or|o) corporat", "empresa ideal"]}
+  - {id: por_que_empresa, topic: condiciones, ask: "Si una empresa te interesa, ¿qué sueles buscar o valorar en ella antes de postular? (el agente lo cruza con la vacante)",
+     patterns: ["por que (quieres|deseas|te interesa) (trabajar|unirte)", "why (do you want to work|are you interested) (at|in|with|for)", "why (us|this company)", "por que nuestra empresa"]}
+  - {id: ingles_uso, topic: condiciones, ask: "¿Cómo usas el inglés en el trabajo (reuniones, documentación, escritura)? Un ejemplo real.",
+     patterns: ["ingles\\b", "english (level|proficiency|skills)", "idiomas"]}
+  - {id: salario_comentario, topic: condiciones, ask: "¿Cómo quieres hablar de tu expectativa salarial? (rango, negociable, depende del paquete...)",
+     patterns: ["expectativa salarial", "pretension(es)? (salarial|de renta)", "salary expectation", "desired salary", "renta (esperada|pretendida)"]}
+  - {id: referencias, topic: condiciones, ask: "¿Puedes dar referencias laborales? ¿De quién y en qué condiciones (solo si hay oferta)?",
+     patterns: ["referencias", "references"]}
+  - {id: intereses, topic: personal, ask: "¿Qué haces fuera del trabajo (intereses, proyectos personales, voluntariado)?",
+     patterns: ["intereses", "hobbies", "tiempo libre", "outside (of )?work", "voluntariado", "volunteer"]}
+  - {id: algo_mas, topic: personal, ask: "¿Hay algo importante que no está en tu CV y quieras que sepan?",
+     patterns: ["algo mas que (quieras|desees)", "anything else", "additional information", "informacion adicional", "comentarios adicionales", "additional comments", "no esta en (tu|su) cv"]}
+  - {id: por_que_contratarte, topic: personal, ask: "¿Por qué deberían contratarte a ti y no a otra persona? Sé específico/a.",
+     patterns: ["por que (deberiamos|debemos|deberia) (contratarte|contratarle)", "why should we (hire|choose) you", "what makes you (a )?(good|great|ideal|unique)", "que te diferencia"]}

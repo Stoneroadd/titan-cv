@@ -363,7 +363,7 @@ class Runner(threading.Thread):
 
             if questions:
                 qs = [{"label": f["label"], "type": f["type"], "options": f.get("options"),
-                       "question": f.get("question")} for f in questions]
+                       "question": f.get("question"), "proposal": f.get("proposal")} for f in questions]
                 page.bring_to_front()
                 return self._pause(job_id, f"{len(qs)} question(s) I cannot answer from your profile.",
                                    step="fill", kind="questions", questions=qs)
